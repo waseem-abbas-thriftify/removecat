@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <filterSelect name="store_id" provider="${ $.parentName }">
+                <settings>
+                    <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options"/>
+                    <caption translate="true">All Store Views</caption>
+                    <label translate="true">Store View</label>
+                    <dataScope>store_id</dataScope>
+                </settings>
+            </filterSelect>
+        </filters>
+        <massaction name="listing_massaction"
+                    component="Magento_Ui/js/grid/tree-massactions"
+                    class="\Magento\Catalog\Ui\Component\Product\MassAction">
+            <action name="add_categories_mass_products">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to Add Selected Products?</message>
+                        <title translate="true">Add Categories</title>
+                    </confirm>
+                    <url path="updatecategory/update/productcategories"/>
+                    <type>addcategories</type>
+                    <label translate="true">Add to Category</label>
+                </settings>
+            </action>
+            <!--<action name="remove_categories_mass_products">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to Remove Selected Products?</message>
+                        <title translate="true">Remove Categories</title>
+                    </confirm>
+                    <url path="updatecategory/update/removeproductcategories"/>
+                    <type>removecategories</type>
+                    <label translate="true">Remove from Category</label>
+                </settings>
+            </action>-->
+        </massaction>
+        <paging name="listing_paging"/>
+        <!-- Display Categories filter on Product Page -->
+        <!--<filters name="listing_filters">
+            <filterSelect name="category_id" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <options class="Magento\Catalog\Ui\Component\Product\Form\Categories\Options"/>
+                    <caption translate="true">– Please Select a Category –</caption>
+                    <label translate="true">Categories</label>
+                    <dataScope>category_id</dataScope>
+                    <imports>
+                        <link name="visible">componentType = column, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
+        </filters>-->
+    </listingToolbar>
+</listing>
