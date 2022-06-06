@@ -37,7 +37,7 @@
                     <label translate="true">Add to Category</label>
                 </settings>
             </action>
-            <!--<action name="remove_categories_mass_products">
+            <action name="remove_categories_mass_products">
                 <settings>
                     <confirm>
                         <message translate="true">Are you sure you want to Remove Selected Products?</message>
@@ -47,9 +47,55 @@
                     <type>removecategories</type>
                     <label translate="true">Remove from Category</label>
                 </settings>
-            </action>-->
+            </action>
         </massaction>
         <paging name="listing_paging"/>
+    <!-- Display Categories filter on Product Page -->
+        <filters name="listing_filters">
+            <filterSelect name="category_id" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <options class="Magento\Catalog\Ui\Component\Product\Form\Categories\Options"/>
+                    <caption translate="true">– Please Select a Category –</caption>
+                    <label translate="true">Categories</label>
+                    <dataScope>category_id</dataScope>
+                    <imports>
+                        <link name="visible">componentType = column, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
+        </filters>
+    </listingToolbar>
+<!--<listingToolbar name="listing_top">
+    <massaction name="listing_massaction">
+        <action name="add_categories_mass_products">
+            <settings>
+                <confirm>
+                    <title translate="true">Add to Category</title>
+                    <message translate="true">Are you sure you want to Update Selected Products?</message>
+                </confirm>
+                <url path="updatecategory/update/productcategories"/>
+                <type>add-categories</type>
+                <label translate="true">Add to Category</label>
+            </settings>
+        </action>
+        <action name="remove_categories_mass_products">
+            <settings>
+                <confirm>
+                    <title translate="true">Remove from Category</title>
+                    <message translate="true">Are you sure you want to Remove Selected Products?</message>
+                </confirm>
+                <url path="updatecategory/update/removeproductcategories"/>
+                <type>remove-categories</type>
+                <label translate="true">Remove from Category</label>
+            </settings>
+        </action>
+    </massaction> -->
         <!-- Display Categories filter on Product Page -->
         <!--<filters name="listing_filters">
             <filterSelect name="category_id" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
@@ -69,6 +115,16 @@
                     </imports>
                 </settings>
             </filterSelect>
-        </filters>-->
-    </listingToolbar>
+        </filters>
+    </listingToolbar>-->
+    <columns name="product_columns" class="Magento\Catalog\Ui\Component\Listing\Columns">
+        <column name="category_id" class="Thriftify\UpdateCategoriesAction\Ui\Component\Listing\Column\Category">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Categories</item>
+                    <item name="sortOrder" xsi:type="number">35</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
 </listing>

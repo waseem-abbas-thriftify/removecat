@@ -65,6 +65,8 @@ class ProductCategories extends Action
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $productIds = $collection->getAllIds();
+        //$productIds = $this->getRequest()->getParam("selected");
+        //echo "<pre>"; print_r($productIds); exit;
         $this->session->setProductIds($productIds);
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->getConfig()->getTitle()->prepend("Update Products Categories");
